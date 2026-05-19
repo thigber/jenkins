@@ -1,23 +1,30 @@
 pipeline {
     agent any
+
     stages {
         stage('Checkout') {
             steps {
+                // Baixa o código do seu GitHub
                 checkout scm
             }
         }
+
         stage('Validar HTML') {
             steps {
-                echo 'Verificando se o arquivo index.html existe...'
-                sh 'test -f index.html' // Verifica se o arquivo está lá
-                echo 'HTML validado com sucesso!'
+                echo 'Iniciando validação do index.html...'
+                
+                // Comando que procura a tag <body> no arquivo. 
+                // Se não encontrar, o comando 'grep' retorna erro e para o pipeline.
+                sh "grep -q '<body>' index.html"
+                
+                echo 'Sucesso: O arquivo index.html contém a tag <body>!'
             }
         }
+
         stage('Deploy Simulado') {
             steps {
-                echo 'Copiando index.html para o servidor de produção...'
-                // Aqui simularíamos o envio para um servidor Apache/Nginx
-                echo "O site de Thiago Bergamaschi foi atualizado!"
+                echo 'HTML validado! Fingindo que estou enviando para o servidor...'
+                echo 'Site atualizado com sucesso 🚀'
             }
         }
     }
