@@ -1,19 +1,23 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo 'Compilando 1234......'
+                checkout scm
             }
         }
-        stage('Test') {
+        stage('Validar HTML') {
             steps {
-                echo 'Rodando testes...'
+                echo 'Verificando se o arquivo index.html existe...'
+                sh 'test -f index.html' // Verifica se o arquivo está lá
+                echo 'HTML validado com sucesso!'
             }
         }
-        stage('Deploy') {
+        stage('Deploy Simulado') {
             steps {
-                echo 'Deploy realizado com sucessooo 🚀'
+                echo 'Copiando index.html para o servidor de produção...'
+                // Aqui simularíamos o envio para um servidor Apache/Nginx
+                echo "O site de Thiago Bergamaschi foi atualizado!"
             }
         }
     }
