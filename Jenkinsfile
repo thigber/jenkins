@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploy realizado com sucesso 🚀'
+                echo 'Deploy realizado com sucessooo 🚀'
             }
         }
     }
